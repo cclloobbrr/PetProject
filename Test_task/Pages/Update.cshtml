@@ -1,0 +1,49 @@
+﻿@page "{id?}"
+@model Test_task.Pages.UpdateModel
+@{
+}
+
+<h1>Обновление проверки</h1>
+
+<form method="post">
+    <div>
+        <label>
+            Проверяемый СМП:
+            <input asp-for="SMP.Name" value="@Model.Check.SMP.Name"/>
+            <span asp-validation-for="SMP.Name" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Контролирующий орган:
+            <select asp-for="Check.SupervisoryId">
+                <option value="@Model.Check.Supervisory.Name">@Model.Check.Supervisory.Name</option>
+                @foreach (var item in Model.SupervisoryList)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            <span asp-validation-for="Check.Supervisory.Id" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Дата начала проверки:
+            <input asp-for="Check.DateStart" type="date" value="@Model.Check.DateStart.ToString("yyyy-MM-dd")" />
+            <span asp-validation-for="Check.DateStart" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Плановая длительность (дни):
+            <input asp-for="Check.PlannedDuration" value="@Model.Check.PlannedDuration" />
+            <span asp-validation-for="Check.PlannedDuration" class="text-danger"></span>
+        </label>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <button type="submit" asp-page-handler="Update">Сохранить</button>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

@@ -1,0 +1,55 @@
+﻿@page
+@model Test_task.Pages.Form_of_additionModel
+@{
+}
+
+<h1>Добавление проверки</h1>
+
+<form method="post">
+    <div>
+        <label>
+            Проверяемый СМП:
+            <input asp-for="SMP.Name" />
+            <span asp-validation-for="SMP.Name" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Контролирующий орган:
+            <select asp-for="SupervisoryId">
+                <option value="">--Выберите контролирующий орган--</option>
+                @foreach (var item in Model.SupervisoryList)
+                {
+                    <option value="@item.Id">@item.Name</option>
+                }
+            </select>
+            <span asp-validation-for="SupervisoryId" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Дата начала проверки:
+            <input asp-for="NewCheck.DateStart" type="date"/>
+            <span asp-validation-for="NewCheck.DateStart" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <label>
+            Плановая длительность (дни):
+            <input asp-for="NewCheck.PlannedDuration" />
+            <span asp-validation-for="NewCheck.PlannedDuration" class="text-danger"></span>
+        </label>
+    </div>
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+    <button type="submit" asp-page-handler="Add">Сохранить</button>
+</form>
+
+
+<form method="post">
+    <button type="submit" asp-page-handler="ImportFromExcel">Загрузить из Excel</button>
+</form>
+
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

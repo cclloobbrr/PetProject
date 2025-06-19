@@ -1,0 +1,55 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<form method="get" id="mainForm">
+    <div>
+        <label>Наименование СМП:</label>
+        <input type="text" name="name" value="@Model.CurrentSearchName" />
+    </div>
+    <div>
+        <label>Дата проверки</label>
+        <input type="date" name="date" value="@Model.CurrentSearchDate" />
+    </div>
+
+    <div class="button-group">
+        <button type="button" onclick="window.location.href='/Form_of_addition'">Добавить</button>
+        <button type="submit" name="handler" value="Search">Найти</button>
+    </div>
+</form>
+<form method="post" asp-page-handler="ExportToExcel">
+    <button type="submit">Excel</button>
+</form>
+
+<table id="updatedTable">
+    <tr>
+        <th>№</th>
+        <th>Проверяемый СМП</th>
+        <th>Контролирующий орган</th>
+        <th>Плановый период проверки</th>
+        <th>Плановая Длительность</th>
+        <th>Действия</th>
+    </tr>
+    @{
+        int i = 1;
+    }
+    @foreach (var check in Model.Checks)
+    {
+        <tr data-check-id="@check.Id">
+            <td>@(i++)</td>
+            <td>@check.SMP.Name</td>
+            <td>@check.Supervisory.Name</td>
+            <td>@check.DateStart.ToString("dd.MM.yy") - @check.DateFinish.ToString("dd.MM.yy")</td>
+            <td>@check.PlannedDuration</td>
+            <td>
+                <form method="post" asp-page-handler="Delete">
+                    <input type="hidden" name="id" value="@check.Id" />
+                    <button type="submit" onclick="return confirm('Удалить?')">Del</button>
+                </form>
+                <a asp-page="/Update" asp-route-id="@check.Id" class="btn btn-link">Upd</a>
+            </td>
+        </tr>
+    }
+</table>
