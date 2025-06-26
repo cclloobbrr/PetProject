@@ -65,8 +65,8 @@ ___
 
 ```mermaid
 erDiagram
-    CHECK }--|| SMP : "Проверяемый СМП"
-    CHECK }--|| Supervisory : "Контролирующий орган"
+    CHECK }|--|| SMP : "Проверяемый СМП"
+    CHECK }|--|| Supervisory : "Контролирующий орган"
     CHECK {
         Guid Id PK
         Guid SMPId FK
