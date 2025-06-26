@@ -4,7 +4,7 @@
 Разработан на **ASP.NET Core Razor Pages** с использованием **MSSQL** и **Entity Framework Core**.
 
 ## 🛠 Технологии
-- **Backend**: ASP.NET Core 6.0
+- **Backend**: ASP.NET Core
 - **Database**: MSSQL (Docker)
 - **ORM**: Entity Framework Core
 - **Дополнительно**: Экспорт в Excel, валидация форм
@@ -19,6 +19,7 @@
 1. Запустите контейнер с БД:
    ```bash
    docker-compose up -d
+   ```
 
 
 2. Установка EntityFramework
