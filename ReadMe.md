@@ -65,22 +65,22 @@ ___
 
 ```mermaid
 erDiagram
-    CHECK ||--o{ SME : "Проверяемый СМП"
-    CHECK ||--|| AUTHORITY : "Контролирующий орган"
+    CHECK }--|| SMP : "Проверяемый СМП"
+    CHECK }--|| Supervisory : "Контролирующий орган"
     CHECK {
-        int Id PK
-        DateTime Date
-        string Result
-        string Comments
+        Guid Id PK
+        Guid SMPId FK
+        Guid SupervisoryId FK
+        DateTime DateStart
+        DateTime DateFinish
+        int PlannedDuration
     }
-    SME {
+    SMP {
         int Id PK
         string Name
-        string Address
     }
-    AUTHORITY {
+    Supervisory {
         int Id PK
         string Name
-        string ContactPerson
     }
 ```
