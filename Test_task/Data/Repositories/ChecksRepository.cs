@@ -67,6 +67,17 @@ namespace Test_task.Data.Repositories
             await _dbContext.SaveChangesAsync();
         }
 
+        public async Task AddSupervisory(string name)
+        {
+            var supervisory = await _dbContext.Supervisory.FirstOrDefaultAsync(s => s.Name == name);
+            if (supervisory == null)
+            {
+                supervisory = new SupervisoryEntity { Id = Guid.NewGuid(), Name = name };
+                await _dbContext.Supervisory.AddAsync(supervisory);
+            }
+            await _dbContext.SaveChangesAsync();
+        }
+
         public async Task<List<SupervisoryEntity>> GetSupervisoryList()
         {
             return await _dbContext.Supervisory

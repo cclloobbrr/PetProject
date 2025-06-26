@@ -1,0 +1,21 @@
+﻿@page
+@model Test_task.Pages.AddSupervisoryModel
+@{
+}
+
+<form method="post">
+    <div>
+        <label>
+            Название контролирующего органа
+            <input asp-for="Supervisory.Name" />
+            <span asp-validation-for="Supervisory.Name" class="text-danger"></span>
+        </label>
+    </div>
+    <div>
+        <button type="submit" asp-page-handler="AddSupervisory">Добавить</button>
+    </div>
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}
